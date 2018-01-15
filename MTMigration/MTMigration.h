@@ -22,7 +22,7 @@ typedef void (^MTExecutionBlock)(void);
 
  */
 
-+ (void) migrateToVersion:(NSString *)version block:(MTExecutionBlock)migrationBlock;
++ (void) migrateToVersion:(NSString *)version block:(__attribute__((noescape)) MTExecutionBlock)migrationBlock;
 
 /**
  Executes a block of code for a specific build number and remembers this build as the latest migration done by MTMigration.
@@ -32,7 +32,7 @@ typedef void (^MTExecutionBlock)(void);
 
  */
 
-+ (void) migrateToBuild:(NSString *)build block:(MTExecutionBlock)migrationBlock;
++ (void) migrateToBuild:(NSString *)build block:(__attribute__((noescape)) MTExecutionBlock)migrationBlock;
 
 /**
 
@@ -42,7 +42,7 @@ typedef void (^MTExecutionBlock)(void);
 
  */
 
-+ (void) applicationUpdateBlock:(MTExecutionBlock)updateBlock;
++ (void) applicationUpdateBlock:(__attribute__((noescape)) MTExecutionBlock)updateBlock;
 
 /**
 
@@ -52,7 +52,7 @@ typedef void (^MTExecutionBlock)(void);
 
  */
 
-+ (void) buildNumberUpdateBlock:(MTExecutionBlock)updateBlock;
++ (void) buildNumberUpdateBlock:(__attribute__((noescape)) MTExecutionBlock)updateBlock;
 
 /** Clears the last migration remembered by MTMigration. Causes all migrations to run from the beginning. */
 
