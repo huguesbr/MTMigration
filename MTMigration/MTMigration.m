@@ -19,7 +19,7 @@ static NSString * const MTMigrationLastAppBuildKey   = @"MTMigration.lastAppBuil
 @implementation MTMigration
 
 
-+ (void) migrateToVersion:(NSString *)version block:(MTExecutionBlock)migrationBlock {
++ (void) migrateToVersion:(NSString *)version block:(__attribute__((noescape)) MTExecutionBlock)migrationBlock {
     // version > lastMigrationVersion && version <= appVersion
     if ([version compare:[self lastMigrationVersion] options:NSNumericSearch] == NSOrderedDescending &&
         [version compare:[self appVersion] options:NSNumericSearch]           != NSOrderedDescending) {
@@ -34,7 +34,7 @@ static NSString * const MTMigrationLastAppBuildKey   = @"MTMigration.lastAppBuil
 }
 
 
-+ (void) migrateToBuild:(NSString *)build block:(MTExecutionBlock)migrationBlock
++ (void) migrateToBuild:(NSString *)build block:(__attribute__((noescape)) MTExecutionBlock)migrationBlock
 {
     // build > lastMigrationBuild && build <= appVersion
     if ([build compare:[self lastMigrationBuild] options:NSNumericSearch] == NSOrderedDescending &&
@@ -50,7 +50,7 @@ static NSString * const MTMigrationLastAppBuildKey   = @"MTMigration.lastAppBuil
 }
 
 
-+ (void) applicationUpdateBlock:(MTExecutionBlock)updateBlock {
++ (void) applicationUpdateBlock:(__attribute__((noescape)) MTExecutionBlock)updateBlock {
     if (![[self lastAppVersion] isEqualToString:[self appVersion]]) {
         updateBlock();
 
@@ -63,7 +63,7 @@ static NSString * const MTMigrationLastAppBuildKey   = @"MTMigration.lastAppBuil
 }
 
 
-+ (void) buildNumberUpdateBlock:(MTExecutionBlock)updateBlock {
++ (void) buildNumberUpdateBlock:(__attribute__((noescape)) MTExecutionBlock)updateBlock {
     if (![[self lastAppBuild] isEqualToString:[self appBuild]]) {
         updateBlock();
         
